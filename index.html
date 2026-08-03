@@ -4,24 +4,102 @@
     <title>Lyra Plasma</title>
     <style>
       * {
-        background: #1fffff;
-        color: #f00000;
+        background: #effffe;
+        color: #101011;
+        font-size: 1.5rem;
+        text-shadow: 2px 2px lightpink;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+      }
+      html, main {
+        border: dashed 3px skyblue;
+        margin: 10px;
+        padding: 20px;
       }
       main {
-        border: dashed 3px whitesmoke;
+        border: dotted 10px blue;
+        border-radius: 10%;
       }
-      h1 { background: #2fffff; }
-      p { background: #3fffff; }
+      h1 {
+        background: #feffef;
+        color: coral;
+        text-align: center;
+        text-shadow: 2px 2px skyblue;
+        border: solid 5px skyblue;
+        border-radius: 50%;
+        padding: 20px;
+      }
+      p { 
+        background: #fffeef;
+        border: solid 5px gold;
+        border-radius: 50%;
+        padding: 10px;
+        font-style: oblique;
+        text-shadow: 4px 5px skyblue;
+      }
+      span {
+        text-shadow: 4px 3px pastelpink;
+      }
+      .circled {
+        color: gray;
+        display: inline-block;
+        /*white-space: pre; */
+        border: solid 5px gold;
+        border-radius: 50%;
+        padding: 10px;
+        font-style: oblique;
+        text-shadow: 4px 5px skyblue;
+      }
+      /*/////////// ANIMaTIONS hereeeeeeeeeee ///////////////////////*/
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      .rotating, .rotating2 {
+        animation: spin 3s linear infinite;
+        display: inline-block;
+      }
+      @keyframes pulse {
+        from { transform: scale(0.75); opacity: 0.6; }
+        to { transform: scale(1.75); opacity: 1; }
+      }
+      .rotating2 {
+        animation: spin 3s ease-in-out infinite alternate;
+      }
+      .pulse-border {
+        animation: pulse 900ms ease-in-out infinite alternate;
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Hellope! I'm Lyra</h1>
-      <p>
-        You can visit my github <a href="https://github.com/lyraplasma">here</a>
-        <br><hr><br>
-        We have <a href="https://discord.gg/x6RjkSgYGQ">discord server too!</a>
-      </p>
+    <main class="pulse-border"><span class="rotating">+</span>
+      <div class="rotating2">+--------------------------------------------------------------------------+ <span class="rotating">(>u<)</span></div>
+      <h1>Hellope! I'm Lyra <span class="rotating">:3</span></h1>
+      <div><span class="rotating">+</span>--------------------------------------------------------------------------<span class="rotating">+</span></div>
+      <p>You can visit my github</p><a href="https://github.com/lyraplasma">here</a>
+      <div>+--------------------------------------------------------------------------+</div>
+      <p>We have a</p><a href="https://discord.gg/x6RjkSgYGQ">discord server too!</a>
+      <div class="rotating2">+-------------------+</div>
+      <footer>
+        <p>© <span id="current_year"></span> Lyra Plasma. All Rights Reserved</p>
+      </footer>
     </main>
   </body>
+  <!-- ######################################### SCRIPT JAVASCRIPT HERE -->
+  <!-- v BEGIN SCRIPT JAVASCRIPT HERE -->
+  <script>
+    const current_year = document.getElementById("current_year");
+    current_year.textContent = new Date().getFullYear();
+    const circled_ps = document.querySelectorAll("p");
+    circled_ps.forEach(p => {
+
+      //const chars = p.textContent.split(""); 
+      const chars = p.textContent.split(" "); 
+      p.innerHTML = chars.map(char => `<span class="circled rotating2">${char}</span>`).join("");
+    });
+  </script>
+  <!-- ^ END SCRIPT JAVASCRIPT HERE -->
 </html>
