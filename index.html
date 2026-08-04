@@ -9,31 +9,53 @@
         font-size: 1.5rem;
         text-shadow: 2px 2px lightpink;
       }
+
+      /*/////////// ANIMaTIONS hereeeeeeeeeee ///////////////////////*/
+      @keyframes spin {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+      @keyframes pulse {
+        from { transform: scale(0.75); opacity: 0.6; }
+        to { transform: scale(1.25); opacity: 1; }
+      }
       body {
         display: flex;
         flex-direction: column;
+        border: dashed 20px orange;
+        border-radius: 20%;
       }
       html, main {
-        border: dashed 3px skyblue;
+        border: dashed 7px skyblue;
+        border-style: inset dotted dashed;
+        border-radius: 20%;
         margin: 10px;
         padding: 20px;
       }
+
       main {
-        border: dotted 10px blue;
+        //border: dotted 10px blue;
+        border: dotted 15px gold;
+        border-style: dotted dashed;
         border-radius: 10%;
+      }
+      h1, p {
+        border-style: dotted dashed groove;
       }
       h1 {
         background: #feffef;
         color: coral;
         text-align: center;
         text-shadow: 2px 2px skyblue;
-        border: solid 5px skyblue;
+        border-color: skyblue;
+        border-size: 7px;
         border-radius: 50%;
         padding: 20px;
       }
       p { 
         background: #fffeef;
-        border: solid 5px gold;
+        border-color: gold;
+        border-size: 6px;
         border-radius: 50%;
         padding: 10px;
         font-style: oblique;
@@ -47,23 +69,53 @@
         display: inline-block;
         /*white-space: pre; */
         border: solid 5px gold;
+        border-style: dotted dashed;
         border-radius: 50%;
         padding: 10px;
         font-style: oblique;
         text-shadow: 4px 5px skyblue;
       }
-      /*/////////// ANIMaTIONS hereeeeeeeeeee ///////////////////////*/
-      @keyframes spin {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+
+      .welcome-page {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.9s ease-in-out;
+      }
+      .welcome-page.fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      #bg_audio_btn {
+        padding: 12px 24px;
+        font-size: 1.2rem;
+        border-color: pink;
+        cursor: pointer;
+        transition: all 500ms;
+        border-style: groove;
+        border-radius: 20%;
+        border-width: 20px;
+      }
+      #bg_audio_btn:hover {
+        border-width: 20px;
+        border-color: coral;
+        padding: 22px 34px;
+        font-size: 1.4rem;
+        cursor: pointer;
+        border-radius: 50%;
+        border-style: dotted;
       }
       .rotating, .rotating2 {
         animation: spin 3s linear infinite;
         display: inline-block;
-      }
-      @keyframes pulse {
-        from { transform: scale(0.75); opacity: 0.6; }
-        to { transform: scale(1.75); opacity: 1; }
       }
       .rotating2 {
         animation: spin 3s ease-in-out infinite alternate;
@@ -72,16 +124,30 @@
         animation: pulse 5s ease-in-out infinite alternate;
         display: inline-block;
       }
+      .heartbeat {
+        animation: pulse 250ms ease-out infinite alternate;
+        display: inline-block;
+      }
+
     </style>
   </head>
   <body>
-    <main class="pulse-border"><span class="rotating">+</span>
-      <div class="rotating2">+--------------------------------------------------------------------------+ <span class="rotating">(>u<)</span></div>
-      <h1>Hellope! I'm Lyra <span class="rotating">:3</span></h1>
-      <div><span class="rotating">+</span>--------------------------------------------------------------------------<span class="rotating">+</span></div>
-      <p>You can visit my github</p><a href="https://github.com/lyraplasma">here</a>
-      <div>+--------------------------------------------------------------------------+</div>
-      <p>We have a</p><a href="https://discord.gg/x6RjkSgYGQ">discord server too!</a>
+    <div id="welcome_page" class="welcome-page">
+      <audio id="bg_audio" src="./bg.mp3" loop></audio>
+      <button id="bg_audio_btn">Continue</button>
+    </div>
+    <main>
+      <span class="rotating">+</span>
+      <div class="rotating2">+--------------------------------------------------------------------------+ <span class="rotating heartbeat">(>u<)</span></div>
+      <h1>Hellope! I'm Lyra <span class="rotating2"><span class="rotating heartbeat">:3</span></span></h1>
+      <div>
+        <span class="rotating"><span class="heartbeat">+</span></span>
+        --------------------------------------------------------------------------
+        <span class="rotating"><span class="heartbeat">+</span></span>
+      <p>You can visit my github</p><a href="https://github.com/lyraplasma">here (^v^)</a>
+      <div><span class="rotating2">+</span>--------------------------------------------------------------------------
+        <span class="rotating"><span class="heartbeat">+</span></span>
+        <p>We have a</p><a href="https://discord.gg/x6RjkSgYGQ">discord server too! (>u<)/</a>
       <div class="rotating2">+-------------------+</div>
       <footer>
         <p>© <span id="current_year"></span> Lyra Plasma. All Rights Reserved</p>
@@ -91,15 +157,46 @@
   <!-- ######################################### SCRIPT JAVASCRIPT HERE -->
   <!-- v BEGIN SCRIPT JAVASCRIPT HERE -->
   <script>
+    // main page HERE MAIN::PAGE
     const current_year = document.getElementById("current_year");
-    current_year.textContent = new Date().getFullYear();
     const circled_ps = document.querySelectorAll("p");
-    circled_ps.forEach(p => {
 
+    const welcome_page = document.getElementById("welcome_page");
+    const bg_audio = document.getElementById("bg_audio");
+    const bg_audio_btn = document.getElementById("bg_audio_btn");
+
+    bg_audio_btn.addEventListener("click", async () => {
+      bg_audio.play()
+        .then(() => {
+          console.log("playing...");
+        })
+        .catch(error => {
+          console.error("uhh: ", error);
+        });
+      welcome_page.classList.add("fade-out");
+      setTimeout(() => {
+        welcome_page.style.display = "none";
+      }, 800);
+    });
+
+    current_year.textContent = new Date().getFullYear();
+    circled_ps.forEach(p => {
       //const chars = p.textContent.split(""); 
       const chars = p.textContent.split(" "); 
-      p.innerHTML = chars.map(char => `<span class="circled rotating2">${char}</span>`).join("");
+      p.innerHTML = chars.map(char => `<span class="circled heartbeat">${char}</span>`).join("");
     });
+
+
+    const border_styles = ["dotted", "groove", "dashed"];
+    const html_ = document.querySelector("html");
+    let current_index = 0;
+    function cycle_border_styles() {
+      document.body.style.borderStyle = border_styles[current_index];
+      current_index = (current_index + 1) % border_styles.length;
+      html_.style.borderStyle = border_styles[current_index];
+      setTimeout(cycle_border_styles, 1000);
+    }
+    cycle_border_styles();
   </script>
   <!-- ^ END SCRIPT JAVASCRIPT HERE -->
 </html>
