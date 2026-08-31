@@ -6,26 +6,24 @@
     <title>LyraRivera | Programmer </title>
     <meta name="description" content="I write more Ruby right now with GNU Emacs">
     <link rel="canonical" href="https://github.com/lyraplasma">
-
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://lyraplasma.github.io" />
     <meta property="og:title" content="Lyra - Recreational Programmer" />
     <meta property="og:description" content="My Portfolio Site :))))" />
     <meta property="og:image" content="https://github.com/lyraplasma.png" />
-
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://lyraplasma.github.io" />
     <meta name="twitter:title" content="GNU Emacs - Recreational Programmer" />
     <meta name="twitter:description" content="This is a hand-written sight expect more chaos!" />
     <meta name="twitter:image" content="https://github.com/lyraplasma.png" />
     <style>
+      @import url("https://cdn.cursors-4u.net/cursors/animated/vibing-cat-normal-93d81177-32.css");
       * {
         background: #effffe;
         color: #101011;
         font-size: 1.5rem;
         text-shadow: 2px 2px lightpink;
       }
-
       /*/////////// ANIMaTIONS hereeeeeeeeeee ///////////////////////*/
       @keyframes spin {
         from { transform: rotate(0deg); }
@@ -127,24 +125,18 @@
         font-size: 1.4rem;
         cursor: pointer;
         border-radius: 50%;
-        border-style: dotted;
-      }
+        border-style: dotted; }
       .rotating, .rotating2 {
         animation: spin 3s linear infinite;
-        display: inline-block;
-      }
+        display: inline-block; }
       .rotating2 {
-        animation: spin 3s ease-in-out infinite alternate;
-      }
+          animation: spin 3s ease-in-out infinite alternate; }
       .pulse-border {
         animation: pulse 5s ease-in-out infinite alternate;
-        display: inline-block;
-      }
+        display: inline-block; }
       .heartbeat {
         animation: pulse 250ms ease-out infinite alternate;
-        display: inline-block;
-      }
-
+        display: inline-block; }
     </style>
   </head>
   <body>
@@ -153,8 +145,14 @@
       <button id="bg_audio_btn">Continue</button>
     </div>
     <main>
+      <header>
+	<nav>
+	  <a href="./more-stuff.html" target="_blank">Read More?</a>
+	</nav>
+      </header>
+      <div class="rotating2">>_< <span class="rotating heartbeat">(>u<)</span></div>
       <span class="rotating">+</span>
-      <div class="rotating2">+--------------------------------------------------------------------------+ <span class="rotating heartbeat">(>u<)</span></div>
+      <div class="rotating2">+---------+ <span class="rotating heartbeat">(>u<)</span></div>
       <h1>Hellope! I'm Lyra <span class="rotating2"><span class="rotating heartbeat">:3</span></span></h1>
       <div>
         <span class="rotating"><span class="heartbeat">+</span></span>
@@ -174,13 +172,11 @@
   <!-- v BEGIN SCRIPT JAVASCRIPT HERE -->
   <script>
     // main page HERE MAIN::PAGE
-    const current_year = document.getElementById("current_year");
-    const circled_ps = document.querySelectorAll("p");
-
-    const welcome_page = document.getElementById("welcome_page");
-    const bg_audio = document.getElementById("bg_audio");
-    const bg_audio_btn = document.getElementById("bg_audio_btn");
-
+    const current_year = document.getElementById("current_year"),
+          circled_ps = document.querySelectorAll("p"),
+          welcome_page = document.getElementById("welcome_page");
+    const bg_audio = document.getElementById("bg_audio"),
+          bg_audio_btn = document.getElementById("bg_audio_btn");
     bg_audio_btn.addEventListener("click", async () => {
       bg_audio.play()
         .then(() => {
