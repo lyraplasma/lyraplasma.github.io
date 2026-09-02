@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>More Stuff</title>
-    <style>
-*, *::before, *::after {
-  box-sizing: border-box; }
-*:not(dialog) {
-  margin: 0; }
+<!DOCTYPE html><html lang="en"><head><title>More Stuff</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+*:not(dialog) { margin: 0; }
 @media (prefers-reduced-motion: no-preference) {
   html {
       interpolate-size: allow-keywords; } }
@@ -24,7 +19,9 @@ p {
   text-wrap: pretty; }
 h1, h2, h3, h4, h5, h6 {
   text-wrap: balance; } #root, #__next {
-  isolation: isolate; }      
+    isolation: isolate; }
+.lights { background: black; color: burlywood; display: flex; justify-content: center; align-items: center;
+	  flex-direction: column;}
     </style>      
   </head>
   <body>
@@ -37,10 +34,20 @@ h1, h2, h3, h4, h5, h6 {
     </p>
   </body>
   <script>
-    const toggle_theme = document.getElementById("toggle_theme");
-    toggle_theme.addEventListener("click", () => {
-	document.body.style.backgroundColor = "black";
-	document.body.style.color = "burlywood";
-    });
-</script>    
-</html>  
+//    document.getElementById("toggle_theme").addEventListener("click", () => {
+//	document.body.classList.toggle("lights") });
+let ctx; document.getElementById("toggle_theme").addEventListener("click", () => {
+  document.body.classList.toggle("lights");
+  ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+  ctx.resume();
+  const buf = ctx.createBuffer(1, ctx.sampleRate * 0.2, ctx.sampleRate);
+  const d = buf.getChannelData(0);
+  for (let i = d.length; i--; ) {
+    d[i] = (Math.random() * 2 - 1) * Math.exp(-i / d.length * 4); }
+  const src = ctx.createBufferSource();
+  src.buffer = buf;
+  const gain = ctx.createGain();
+  gain.gain.value = 0.5;
+  src.connect(gain).connect(ctx.destination);
+  src.start(); });
+</script></html>  
