@@ -77,7 +77,13 @@ const apps = [
 { id: 'wakatime', 
   name: 'WakaTime', 
     url: "https://wakatime.com/@387f8535-dd59-4747-aad2-6f66cfc2358f",
-  icon: 'https://cdn.simpleicons.org/wakatime/FFFFFF' },  ];
+  icon: 'https://cdn.simpleicons.org/wakatime/FFFFFF' },
+  { id: 'genggi', name: "Genggi", url: "https://genggi.com/lyraplasma", icon: "https://a.favicon.im/genggi.com" },
+  { id: "codwars", name: "Codewars", url: "https://www.codewars.com/users/lyraplasma", icon: "https://a.favicon.im/codewars.com"},
+  { id: "kaggle", name: "Kaggle", url: "https://www.kaggle.com/lyraplasma", icon: "https://a.favicon.im/kaggle.com" },
+  { id: "leetcode", name: "Leetcode", url: "https://leetcode.com/u/lyraplasma/", icon: "https://a.favicon.im/leetcode.com"},
+  { id: "huggingface", name: "Hugging Face", url: "https://huggingface.co/lyraplasma", icon: "https://a.favicon.im/huggingface.co"}
+];
 
 const CommandPalette = ({ apps }) => {
   const [open, setOpen] = React.useState(false);
@@ -304,8 +310,8 @@ return <>
 </div>
 <div className="p-4">
 <ol>
-  <li>
-    <a className="font-bold text-zinc-800" href="https://lyraplasma.github.io/lyra-was-forced-to-write-markdowns">BLOGS here~~</a>
+  <li className="bg-gold-900">
+    <a className="font-bold text-zinc-500" href="https://lyraplasma.github.io/lyra-was-forced-to-write-markdowns">BLOGS here~~</a>
   </li>
 </ol>
 
