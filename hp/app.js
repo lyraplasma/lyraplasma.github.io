@@ -3,24 +3,25 @@ const apps = [
     name: "Github", 
      url: "https://github.com/lyraplasma",
    icon: "https://cdn.simpleicons.org/github/FFFFFF"},
+
   { 
     id: "linkedin",
     name: "Linkedin", 
     url: "https://www.linkedin.com/in/lyra-rivera-41227a42a",
-    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg"
-  },
+    icon: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/linkedin.svg" },
+  
   { 
       id: "twitter",
       name: "Twitter",
       url: "https://twitter.com/lyraplasma",
-    icon: "https://cdn.simpleicons.org/x/FFFFFF"
-  },
+    icon: "https://cdn.simpleicons.org/x/FFFFFF" },
+  
   { 
     id: 'email', 
     name: 'Email', 
     url: 'mailto:lyra.plasma.prog@gmail.com', 
-    icon: 'https://cdn.simpleicons.org/gmail/FFFFFF' 
-  },
+    icon: 'https://cdn.simpleicons.org/gmail/FFFFFF' },
+
   { 
     id: "spotify", 
     name: "Spotify", 
@@ -53,9 +54,9 @@ const apps = [
 { 
   id: 'bluesky', 
   name: 'Bluesky', 
-  url: 'https://bsky.app/profile/@lyraplasma', 
-  icon: 'https://cdn.simpleicons.org/bluesky/FFFFFF' 
-},
+  url: 'https://bsky.app/profile/lyraplasma.bsky.social', 
+  icon: 'https://cdn.simpleicons.org/bluesky/FFFFFF'  },
+
 { 
   id: 'reddit', 
   name: 'Reddit', 
