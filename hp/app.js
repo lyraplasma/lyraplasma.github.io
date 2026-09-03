@@ -79,6 +79,78 @@ const apps = [
     url: "https://wakatime.com/@387f8535-dd59-4747-aad2-6f66cfc2358f",
   icon: 'https://cdn.simpleicons.org/wakatime/FFFFFF' },  ];
 
+const CommandPalette = ({ apps }) => {
+  const [open, setOpen] = React.useState(false);
+  const [query, setQuery] = React.useState("");
+  const inputRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const down = (e) => {
+      if (e.key === "x") {
+        e.preventDefault();
+        setOpen((o) => !o);
+        if (!open) setQuery("");
+      }
+      if (e.key === "Escape" && open) {
+        setOpen(false);
+        setQuery("");
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, [open]);
+
+  React.useEffect(() => {
+    if (open && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [open]);
+
+  const filtered = apps.filter((app) =>
+    app.name.toLowerCase().includes(query.toLowerCase())
+  );
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 flex items-start justify-center z-50 pt-20 bg-black/50 backdrop-blur-sm active:animate-spin">
+      <div className="bg-white/10 backdrop-blur-md rounded-lg border-4 border-emerald/30 shadow-2xl w-full max-w-md p-4 border-dashed">
+        <div className="bg-gradient-to-r from-green-200 to-orange-800 -m-4 mb-4 px-4 py-2 rounded-t-lg flex justify-between items-center">
+          <span className="text-white font-bold tracking-wide text-sm">M-x alt-x wont work :c</span>
+          <span className="text-white/60 text-xs">ESC to close</span>
+        </div>
+        <input
+          ref={inputRef}
+          type="text"
+          placeholder="V i s u a l  g r e p"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="w-full bg-white/20 text-white placeholder-white/50 rounded px-3 py-2 border border-white/30 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+  
+        <div className="mt-3 max-h-60 overflow-y-auto space-y-1">
+          {filtered.length === 0 ? (
+            <p className="text-white/50 text-sm text-center py-2">Maybe ill add it later :C. you can email me tho</p>
+          ) : (
+            filtered.map((app) => (
+              <a
+                key={app.id}
+                href={app.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 px-3 py-2 rounded hover:bg-white/10 transition text-white active:animate-ping hover:animate-bounce"
+                onClick={() => setOpen(false)}
+              >
+                <img src={app.icon} alt={app.name} className="w-5 h-5 hover:animate-spin" />
+                <span>{app.name}</span>
+              </a>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const WelcomeOverlay = () => {
   const [visible, setVisible] = React.useState(true);
   const [fading, setFading] = React.useState(false);
@@ -155,7 +227,7 @@ const Taskbar = () => {
 	      href={app.url}
 	      target="_blank"
 	      rel="noopener noreferrer"
-	      className="h-10 w-10 flex items-center justify-center hover:bg-white/10 rounded-sm transition border-b-2 border-transparent hover:border-sky-400"
+	      className="h-10 w-10 flex items-center justify-center hover:bg-white/10 rounded-sm transition border-b-2 border-transparent hover:border-sky-400 hover:animate-bounce active:animate-ping"
 	    >
 	      <img src={app.icon} alt={app.name} className="w-5 h-5" />
 	    </a>
@@ -269,11 +341,14 @@ const BottomBar = () => {
 const App = () => {
 return (
 <div className="min-h-screen w-screen relative font-sans overflow-hidden select-none">
-<WelcomeOverlay />
+  <WelcomeOverlay />
+
 <Wallpaper />
 <DesktopApps />
+  <CommandPalette apps={apps} />
 <MainWindow />
 <NewsWindow />
+
 <BottomBar />
 </div>
 );
@@ -281,5 +356,5 @@ return (
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
-//#->todo: maybe separate the components? browser wont allow it :c
-// ^^^ rm this to the next commit
+
+
