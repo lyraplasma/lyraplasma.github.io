@@ -180,8 +180,8 @@ const WelcomeOverlay = () => {
   if (!visible) return null;
 
   return (
-    <div className={`fixed inset-0 flex items-center justify-center z-50 bg-black transition-opacity duration-1000 ${fading ? 'opacity-0' : 'opacity-100'}`}>
-      <p className="text-xl font-bold text-white animate-pulse tracking-wider">
+    <div className={`fixed inset-0 flex items-center justify-center z-50 bg-white transition-opacity duration-1000 ${fading ? 'opacity-0' : 'opacity-100'}`}>
+      <p className="text-xl font-bold text-amber-900 animate-pulse tracking-wider">
         {messages[messageIndex]}
       </p>
     </div>
