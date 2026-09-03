@@ -79,6 +79,42 @@ const apps = [
     url: "https://wakatime.com/@387f8535-dd59-4747-aad2-6f66cfc2358f",
   icon: 'https://cdn.simpleicons.org/wakatime/FFFFFF' },  ];
 
+const WelcomeOverlay = () => {
+  const [visible, setVisible] = React.useState(true);
+  const [fading, setFading] = React.useState(false);
+  const [messageIndex, setMessageIndex] = React.useState(0);
+  const messages = ["B o o t i n g . . .", "H e l l o ? ?", "W e l c o m e >~<"];
+
+  React.useEffect(() => {
+    if (messageIndex < messages.length - 1) {
+      const timer = setTimeout(() => {
+        setMessageIndex(i => i + 1);
+      }, 1200);
+      return () => clearTimeout(timer);
+    } else {
+      const timer = setTimeout(() => {
+        setFading(true);
+      }, 1200);
+      const removeTimer = setTimeout(() => {
+        setVisible(false);
+      }, 2200);
+      return () => {
+        clearTimeout(timer);
+        clearTimeout(removeTimer);
+      };
+    }
+  }, [messageIndex, messages.length]);
+
+  if (!visible) return null;
+
+  return (
+    <div className={`fixed inset-0 flex items-center justify-center z-50 bg-black transition-opacity duration-1000 ${fading ? 'opacity-0' : 'opacity-100'}`}>
+      <p className="text-xl font-bold text-white animate-pulse tracking-wider">
+        {messages[messageIndex]}
+      </p>
+    </div>
+  );
+};
 
 const Wallpaper = () => {
   return (
@@ -151,6 +187,7 @@ return <>
 	 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] bg-white/10 backdrop-blur-md rounded-lg border border-white/30 shadow-2xl overflow-hidden z-10">
   <div className="bg-gradient-to-r from-[#1c4b7a] to-[#3a7bb5] px-3 py-2 flex justify-between items-center active:animate-bounce">
 <span className="text-white text-sm font-bold tracking-wide hover:animate-bounce">@lyraplasma | Saintess of GNU Emacs</span>
+
 <div className="flex gap-2">
   <div className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-800 rounded-sm shadow-inner hover:animate-bounce active:animate-spin"></div>
   <div className="w-3 h-3 bg-green-500 rounded-sm shadow-inner hover:animate-spin active:animate-ping"></div>
@@ -163,6 +200,7 @@ src="https://github.com/lyraplasma.png"
   className="size-40 rounded-full border-8 border-sky-400/60 border-dashed animate-spin [animation-duration:30s] object-cover shadow-2xl motion-reduce:animate-none hover:animate-bounce"
 alt="Profile"
 />
+
 <h2 className="text-white text-2xl font-bold mt-5 drop-shadow-lg hover:animate-spin">Princess Lyra Rivera</h2>
 <p className="text-white/90 text-sm bg-black/30 px-4 py-1 rounded-full backdrop-blur-sm mt-1 hover:animate-ping">
 I write programs!!~
@@ -175,31 +213,32 @@ I write programs!!~
 }
 
 const NewsWindow = () => {
-    return <>
-	       <div className="absolute top-1/2 right-1/4 translate-x-1/4 w-[200px] bg-white/10 backdrop-blur-md rounded-lg border border-dashed shadow-2xl overflow-hidden z-10">
-		   <div className="bg-gradient-to-l from-rose-200 to-rose-500 px-3 py-2 flex justify-between items-center">
-		       <span className="text-white text-sm font-bold tracking-wide animate-pulse">Newwwwws</span>
-		       <div className="flex gap-2">
-			 <svg className="w-4 h-4 hover:animate-bounce rounded-sm transition cursor-pointer" viewBox="0 0 10 10">
-			   <rect x="1" y="4.5" width="8" height="1" fill="#667" />
-			 </svg>
-			 <svg className="w-4 h-4 hover:animate-pulse rounded-sm transition cursor-pointer" viewBox="0 0 10 10">
-			   <rect x="1.5" y="1.5" width="7" height="7" fill="none" stroke="#667" strokeWidth="1" />
-			 </svg>
-			 <svg className="w-4 h-4 hover:bg-red-500 hover:animate-spin rounded-sm transition cursor-pointer" viewBox="0 0 10 10">
-			   <line x1="2" y1="2" x2="8" y2="8" stroke="#667" strokeWidth="1.5" />
-			   <line x1="8" y1="2" x2="2" y2="8" stroke="#667" strokeWidth="1.5" />
-			 </svg>			   
-	               </div>
-		   </div>
-		   <div className="p-4">
-		       <ol>
+return <>
+<div className="absolute top-1/2 right-1/4 translate-x-1/4 w-[200px] bg-white/10 backdrop-blur-md rounded-lg border border-dashed shadow-2xl overflow-hidden z-10">
+<div className="bg-gradient-to-l from-rose-200 to-rose-500 px-3 py-2 flex justify-between items-center">
+<span className="text-white text-sm font-bold tracking-wide animate-pulse">Newwwwws</span>
+<div className="flex gap-2">
+<svg className="w-4 h-4 hover:animate-bounce rounded-sm transition cursor-pointer" viewBox="0 0 10 10">
+<rect x="1" y="4.5" width="8" height="1" fill="#667" />
+</svg>
+<svg className="w-4 h-4 hover:animate-pulse rounded-sm transition cursor-pointer" viewBox="0 0 10 10">
+<rect x="1.5" y="1.5" width="7" height="7" fill="none" stroke="#667" strokeWidth="1" />
+</svg>
+<svg className="w-4 h-4 hover:bg-red-500 hover:animate-spin rounded-sm transition cursor-pointer" viewBox="0 0 10 10">
+<line x1="2" y1="2" x2="8" y2="8" stroke="#667" strokeWidth="1.5" />
+<line x1="8" y1="2" x2="2" y2="8" stroke="#667" strokeWidth="1.5" />
+</svg>			   
+</div>
+</div>
+<div className="p-4">
+<ol>
+  <li>
+    <a className="font-bold text-zinc-800" href="https://lyraplasma.github.io/lyra-was-forced-to-write-markdowns">BLOGS here~~</a>
+  </li>
+</ol>
 
-<li>  <a href="https://lyraplasma.github.io/lyra-was-forced-to-write-markdowns">BLOGS here~~</a></li>			 
-  </ol>
-			 
-			   </div>
-	       </div>
+</div>
+</div>
 </>	       
 }
 
@@ -228,17 +267,19 @@ const BottomBar = () => {
 }
 
 const App = () => {
-  return (
-    <div className="min-h-screen w-screen relative font-sans overflow-hidden select-none">
-	<Wallpaper />
-	<DesktopApps />
-	<MainWindow />
-	<NewsWindow />
-	<BottomBar />
-     </div>
-  );
+return (
+<div className="min-h-screen w-screen relative font-sans overflow-hidden select-none">
+<WelcomeOverlay />
+<Wallpaper />
+<DesktopApps />
+<MainWindow />
+<NewsWindow />
+<BottomBar />
+</div>
+);
 };
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<App />);
-//#->todo: maybe separate the components?
+//#->todo: maybe separate the components? browser wont allow it :c
+// ^^^ rm this to the next commit
