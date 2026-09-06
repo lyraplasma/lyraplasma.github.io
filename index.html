@@ -213,13 +213,25 @@ const canvas = document.getElementById("canvas"),
 	    ctx.fillStyle = `rgb(${rand(255)} ${rand(255)} ${rand(255)} /50%)`;
 	    ctx.fill();
 
-	    ctx.strokeStyle = `rgb(${rand(255)} ${rand(255)} ${rand(255)}/ 50%)`;
+	    ctx.strokeStyle = `rgba(${rand(255)}, ${rand(255)}, ${rand(255)}, 0.5)`;
 	    ctx.lineWidth = rand(2) + 2;
 	    ctx.stroke();
 
 	    ctx.fillStyle = `rgb(${rand(255)} ${rand(255)} ${rand(255)}/ 50%)`;
 	    ctx.fillRect(rand(200), rand(100), rand(50), rand(50));
 
+
+	    ctx.globalAlpha = 0.3;      
+for (let i = 0; i < 36; i++) {
+	ctx.moveTo(i * 10, 0);
+	ctx.lineTo(i * 10, 400);
+	ctx.moveTo(0, i * 10);
+	ctx.lineTo(400, i * 10);
+
+}
+	    ctx.lineWidth = 0.2;
+	ctx.stroke();
+	    ctx.globalAlpha = 1.0;
 	  }
 	}
   setInterval(gen, 500);
